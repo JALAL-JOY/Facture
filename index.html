@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/3.0.1/jspdf.umd.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <title>Facture</title>
+    <style>
+      body {
+        background: #2A7B9B;
+        background: linear-gradient(90deg,rgba(42, 123, 155, 1) 13%, rgb(87, 199, 193) 81%, rgb(192, 207, 199) 100%);
+
+      }
+
+      .contactez {
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 20px;
+        background: rgb(39, 12, 126);
+        background: linear-gradient(
+          90deg,
+          rgba(39, 12, 126, 0.4705531870951506) 0%,
+          rgba(24, 0, 88, 1) 0%,
+          rgba(64, 150, 192, 1) 75%,
+          rgba(112, 149, 185, 1) 100%
+        );
+        border: 1px solid #ddd;
+        border-radius: 30px;
+        box-shadow: 2px 4px 10px rgb(255, 255, 255);
+        margin-left: auto;
+        margin-right: auto;
+      }
+      label {
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+      }
+      .contactez h1 {
+        font-size: 34px;
+        font-weight: bold;
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        margin-bottom: 10px;
+        text-align: center;
+        color: #ffffff;
+      }
+
+      .input1 {
+        margin-bottom: 20px;
+      }
+
+      .input1 label {
+        display: block;
+        font-size: 16px;
+        margin-bottom: 5px;
+      }
+
+      .input1 input {
+        width: 90%;
+        height: 40px;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #ffffff;
+      }
+
+      .input1 input[type="text"] {
+        font-size: 15px;
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+      }
+      .two_btn {
+        display: flex;
+        justify-content: space-between;
+      }
+      .btn1,
+      .btn2 {
+        display: block; /* Make the button a block element */
+        margin-left: auto; /* Set left margin to auto */
+        margin-right: auto; /* Set right margin to auto */
+        margin-top: 15px;
+        width: 300px;
+        background: rgb(39, 12, 126);
+        background: linear-gradient(
+          90deg,
+          rgba(39, 12, 126, 0.4705531870951506) 0%,
+          rgba(64, 150, 192, 1) 0%,
+          rgba(24, 0, 88, 1) 70%,
+          rgba(112, 149, 185, 1) 100%
+        );
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .btn1:hover {
+        background-color: #63ded4;
+      }
+
+      .btn1:focus {
+        outline: none;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      table {
+        margin-top: 20px;
+        border-collapse: collapse;
+        width: 100%;
+        background-color: white;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f0f0f0;
+      }
+      .total-row {
+        color: white;
+        font-weight: bold;
+        background: rgb(39, 12, 126);
+        background: linear-gradient(
+          90deg,
+          rgba(39, 12, 126, 0.4705531870951506) 0%,
+          rgba(64, 150, 192, 1) 0%,
+          rgba(24, 0, 88, 1) 70%,
+          rgba(112, 149, 185, 1) 100%
+        );
+      }
+
+      footer {
+        display: block;
+        justify-content: center;
+        padding: 5px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        background-color: #f9fcff;
+        color: #000000;
+        text-align: center;
+      }
+      @media screen and (max-width: 450px) {
+        form {
+          width: 90%;
+          padding: 20px;
+        }
+
+        .contactez h1 {
+          font-size: 1.5rem;
+          margin: 0.5rem;
+        }
+
+        .input1 {
+          font-size: 0.9rem;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .two_btn {
+          display: block;
+          flex-direction: row;
+          align-items: stretch;
+          width: 100%;
+          margin: 0.5rem 0;
+        }
+
+        .input1 input {
+          width: 100%;
+          margin: 0.3rem 0;
+        }
+
+        .btn1,
+        .btn2 {
+          flex-direction: column;
+          align-items: stretch;
+          width: 100%;
+          font-size: 1rem;
+          margin: 0.5rem 0;
+        }
+
+        .btn1:hover,
+        .btn2:hover {
+          background-color: #63ded4;
+        }
+
+        .btn1:focus,
+        .btn2:focus {
+          outline: none;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+          margin-top: 20px;
+          border-collapse: collapse;
+          width: 100%;
+          font-size: 0.5rem;
+          background-color: white;
+        }
+
+        th,
+        td {
+          border: 1px solid #ddd;
+          padding: 10px;
+          text-align: left;
+        }
+
+        th {
+          background-color: #f0f0f0;
+        }
+        .total-row {
+          color: white;
+          font-weight: bold;
+          background: rgb(39, 12, 126);
+          background: linear-gradient(
+            90deg,
+            rgba(39, 12, 126, 0.4705531870951506) 0%,
+            rgba(64, 150, 192, 1) 0%,
+            rgba(24, 0, 88, 1) 70%,
+            rgba(112, 149, 185, 1) 100%
+          );
+        }
+        #btnsprm {
+          background-color: red;
+          color: white;
+          border: none;
+          width: 150px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="contactez">
+      <h1 style="background: linear-gradient(90deg, rgb(187, 201, 201),rgb(11, 12, 12),rgb(231, 231, 231));
+      background-clip: text;
+      -webkit-background-clip:  text;
+      color: transparent;
+      -webkit-text-fill-color: transparent">Facture</h1>
+      <hr>
+
+      <form action="/page-traitement-donnees" method="post">
+        <div class="input1">
+          <label for="nom">Ref</label>
+          <input
+            type="text"
+            id="ref"
+            name="nom"
+            placeholder="Refference"
+            required
+          />
+        </div>
+        <div class="input1">
+          <label for="nom">Nom Produit :</label>
+          <input
+            type="text"
+            id="nom_prd"
+            name="nom"
+            placeholder="your produit ....."
+            required
+          />
+        </div>
+        <div class="input1">
+          <label for="nom">Prix Produit :</label>
+          <input
+            type="number"
+            id="prix"
+            name="nom"
+            placeholder="your produit ....."
+            required
+          />
+        </div>
+        <div class="input1">
+          <label for="nom">Quantité commande :</label>
+          <input
+            type="number"
+            id="qte"
+            name="qte"
+            placeholder="0.."
+            required
+            min="1"
+            max="100"
+          />
+        </div>
+        <div class="two_btn">
+          <button type="button" class="btn1" onclick="ajouterLigne()">
+            Add
+          </button>
+          <button type="button2" class="btn2" onclick="init()">Reset</button>
+        </div>
+        <hr>
+        <table>
+          <tr>
+            <th>Ref</th>
+            <th>Nom</th>
+            <th>Prix</th>
+            <th>Qte</th>
+            <th>Total</th>
+            <th>Supreme</th>
+          </tr>
+          <tbody id="tableBody"></tbody>
+          <!-- Added tbody with ID -->
+          <!-- Added totals footer -->
+          <tfoot>
+            <tr class="total-row">
+              <td colspan="4">Total HT</td>
+              <td id="totalHT">0.00</td>
+              <td></td>
+            </tr>
+            <tr class="total-row">
+              <td colspan="4">TVA (20%)</td>
+              <td id="tva">0.00</td>
+              <td></td>
+            </tr>
+            <tr class="total-row">
+              <td colspan="4">Total TTC</td>
+              <td id="totalTTC">0.00</td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+      </button>
+      <button type="button2" class="btn2" onclick="PDF()"><i class='bx bxs-cloud-download'></i> PDF</button>
+      </form>
+    </div>
+    <footer>
+      <p>© 2025-Facture</p>
+    </footer>
+  </body>
+</html>
+
+<script>
+  function init() {
+    const ref = (document.getElementById("ref").value = "");
+    const nom = (document.getElementById("nom_prd").value = "");
+    const prix = (document.getElementById("prix").value = "");
+    const qte = (document.getElementById("qte").value = "");
+    ref.focus();
+  }
+  function ajouterLigne() {
+    const ref = document.getElementById("ref").value.trim();
+    const nom = document.getElementById("nom_prd").value.trim();
+    const prix = parseFloat(document.getElementById("prix").value);
+    const qte = parseInt(document.getElementById("qte").value);
+    const tbody = document.getElementById("tableBody");
+
+    if (!ref || !nom || isNaN(prix) || isNaN(qte) || prix <= 0 || qte <= 0) {
+      alert("Remplissez tous les champs correctement.");
+      return;
+    }
+
+    const total = prix * qte;
+    const tr = document.createElement("tr");
+
+    tr.innerHTML = `
+            <td>${ref}</td>
+            <td>${nom}</td>
+            <td>${prix.toFixed(2)} Dh</td>
+            <td>${qte}</td>
+            <td class="ligneTotal">${total.toFixed(2)}  Dh</td>
+            <td><button id="btnsprm" onclick="supprimerLigne(this)" style="
+              background-color: red ;
+              border: none;
+              border-radius: 26px;
+              color: white;
+              padding: 8px 15px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 16px;
+              margin: 4px 2px;
+              cursor: pointer;"
+              >remove</button></td>`;
+
+    tbody.appendChild(tr);
+    calculerTotaux();
+
+    // Reset inputs
+    document.getElementById("ref").value = "";
+    document.getElementById("nom_prd").value = "";
+    document.getElementById("prix").value = "";
+    document.getElementById("qte").value = "";
+  }
+
+  function supprimerLigne(btn) {
+    btn.closest("tr").remove();
+    calculerTotaux();
+  }
+
+  function calculerTotaux() {
+    let totalHT = 0;
+    document.querySelectorAll(".ligneTotal").forEach((td) => {
+      totalHT += parseFloat(td.textContent);
+    });
+
+    const tva = totalHT * 0.2;
+    const ttc = totalHT + tva;
+
+    // Update totals in footer
+    document.getElementById("totalHT").textContent = totalHT.toFixed(2);
+    document.getElementById("tva").textContent = tva.toFixed(2);
+    document.getElementById("totalTTC").textContent = ttc.toFixed(2);
+  }
+  function PDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+  
+    doc.setFontSize(22);
+    doc.text("Facture", 105, 20, { align: "center" });
+  
+    // Clone the table
+    const tableClone = document.querySelector("table").cloneNode(true);
+  
+    // Remove last column (Supreme) from header and all rows
+    tableClone.querySelectorAll("tr").forEach(row => {
+      if (row.cells.length > 5) {
+        row.deleteCell(5); // Remove 6th cell only if it exists
+      }
+    });
+  
+    // Create a temporary hidden container
+    const tempDiv = document.createElement("div");
+    tempDiv.style.display = "none";
+    tempDiv.appendChild(tableClone);
+    document.body.appendChild(tempDiv);
+  
+    // Generate PDF from the modified table
+    doc.autoTable({
+      html: tableClone,
+      startY: 30,
+      theme: 'grid',
+      headStyles: { fillColor: [39, 12, 126] },
+    });
+  
+    // Clean up
+    document.body.removeChild(tempDiv);
+  
+    doc.save("facture.pdf");
+  }
+  
+  
+  
+</script>
