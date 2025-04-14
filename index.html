@@ -137,6 +137,23 @@
           rgba(112, 149, 185, 1) 100%
         );
       }
+      .bx-message-square-minus{
+        display: none;
+      }
+      #btnsprm{
+        background-color: red ;
+        border: none;
+        border-radius: 26px;
+        color: white;
+        padding: 8px 15px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        
+      }
 
       footer {
         display: block;
@@ -228,11 +245,22 @@
             rgba(112, 149, 185, 1) 100%
           );
         }
-        #btnsprm {
-          background-color: red;
-          color: white;
-          border: none;
-          width: 150px;
+        #btnsprm{
+          background-color: white;
+          width: 20px;
+          
+        }
+        
+        
+        #spn{
+          display: none;
+        }
+
+        .bx-message-square-minus {
+          display: block;
+          color: #000000; 
+          width: 10px;
+          margin-right: 5px;
         }
       }
     </style>
@@ -365,19 +393,7 @@
             <td>${prix.toFixed(2)} Dh</td>
             <td>${qte}</td>
             <td class="ligneTotal">${total.toFixed(2)}  Dh</td>
-            <td><button id="btnsprm" onclick="supprimerLigne(this)" style="
-              background-color: red ;
-              border: none;
-              border-radius: 26px;
-              color: white;
-              padding: 8px 15px;
-              text-align: center;
-              text-decoration: none;
-              display: inline-block;
-              font-size: 16px;
-              margin: 4px 2px;
-              cursor: pointer;"
-              >remove</button></td>`;
+            <td><button id="btnsprm" onclick="supprimerLigne(this)"><i class='bx bx-message-square-minus'></i> <span id="spn">remove </span></button></td>`;
 
     tbody.appendChild(tr);
     calculerTotaux();
